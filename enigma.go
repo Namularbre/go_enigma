@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Enigma struct {
 	firstRotor Rotor
@@ -38,6 +41,7 @@ func GenerateEnigma() *Enigma {
 }
 
 func (e *Enigma) Encrypt(plain string) string {
+	plain = strings.ToLower(plain)
 	var encrypted string
 
 	for _, cint := range plain {
