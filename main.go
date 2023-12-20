@@ -5,6 +5,8 @@ import "fmt"
 func main() {
 	e := GenerateEnigma()
 
-	encrypted := e.Encrypt("thefinals")
+	in := ReadInput()
+
+	encrypted := e.Encrypt(in)
 	fmt.Println(encrypted)
 }
