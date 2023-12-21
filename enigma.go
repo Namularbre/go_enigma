@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -47,16 +46,15 @@ func (e *Enigma) Encrypt(plain string) string {
 	for _, cint := range plain {
 		c := string(cint)
 		c = e.toc.GetOutput(c)
-
-		if c == "" {
-			fmt.Println("Error in the table of connection")
-		}
 		c = e.firstRotor.GetOutput(c)
+		c = e.toc.GetOutput(c)
 
-		if c == "" {
-			fmt.Println("Error in the rotor")
-		}
 		encrypted += c
+	}
+
+	return encrypted
+}
+
 	}
 
 	return encrypted
