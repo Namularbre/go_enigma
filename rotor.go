@@ -1,5 +1,7 @@
 package main
 
+import "slices"
+
 type Rotor struct {
 	input  []string
 	output []string
@@ -18,15 +20,17 @@ func (r *Rotor) rotate() {
 }
 
 func (r *Rotor) GetOutput(i string) string {
-	for index, char := range r.input {
-		if char == i {
-			outputIndex := (index+r.gap)%len(r.output) - 1
-			for _, n := range r.nexts {
-				char = n.GetOutput(char)
-			}
-			r.rotate()
+	if slices.Contains(r.input, i) {
+		for index, char := range r.input {
+			if char == i {
+				outputIndex := (index+r.gap)%len(r.output) - 1
+				for _, n := range r.nexts {
+					char = n.GetOutput(char)
+				}
+				r.rotate()
 
-			return r.output[outputIndex]
+				return r.output[outputIndex]
+			}
 		}
 	}
 	return ""
