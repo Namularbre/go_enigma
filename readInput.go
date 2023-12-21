@@ -1,15 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func ReadInput() string {
-	var input string
+	var i string
 	fmt.Println("Enter the text you want to encrypt:")
-	_, err := fmt.Scanln(&input)
+	reader := bufio.NewReader(os.Stdin)
+	i, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("Input error, try again.")
 		return ReadInput()
 	}
-	return input
+	return i
 }
