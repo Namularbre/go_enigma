@@ -19,8 +19,9 @@ func (r *Rotor) rotate() {
 
 func (r *Rotor) GetOutput(i string) string {
 	if slices.Contains(r.input, i) {
-		inputIndex := slices.Index(r.input, i)
-		outputIndex := (inputIndex+r.gap)%len(r.output) - 1
+		outputSize := len(r.output) - 1
+		inputIndex := slices.Index(r.input, i) + r.gap
+		outputIndex := inputIndex % outputSize
 		output := r.output[outputIndex]
 
 		for _, next := range r.nexts {
