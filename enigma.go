@@ -6,7 +6,7 @@ import (
 
 type Enigma struct {
 	firstRotor Rotor
-	toc        TableOfConnection
+	toc        TableOfConnexions
 }
 
 func GenerateEnigma() *Enigma {
@@ -15,7 +15,7 @@ func GenerateEnigma() *Enigma {
 	alphabet := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
 
 	changedAlphabet := []string{"a", "c", "i", "e", "f", "g", "h", "j", "k", "l", "x", "y", "o", "w", "p", "q", "r", "d", "s", "b", "t", "u", "v", "m", "z", "n"}
-	toc := TableOfConnection{input: alphabet, output: changedAlphabet}
+	toc := TableOfConnexions{input: alphabet, output: changedAlphabet}
 
 	changedAlphabet0 := []string{"i", "e", "o", "q", "f", "g", "k", "p", "l", "x", "y", "t", "w", "c", "r", "a", "h", "u", "j", "s", "b", "v", "m", "d", "z", "n"}
 	changedAlphabet1 := []string{"e", "z", "i", "o", "q", "g", "k", "x", "l", "v", "y", "t", "f", "w", "c", "r", "a", "p", "h", "u", "j", "n", "s", "b", "m", "d"}
@@ -50,11 +50,6 @@ func (e *Enigma) Encrypt(plain string) string {
 		c = e.toc.GetOutput(c)
 
 		encrypted += c
-	}
-
-	return encrypted
-}
-
 	}
 
 	return encrypted
