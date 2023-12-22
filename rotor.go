@@ -21,17 +21,16 @@ func (r *Rotor) rotate() {
 
 func (r *Rotor) GetOutput(i string) string {
 	if slices.Contains(r.input, i) {
-		for index, char := range r.input {
-			if char == i {
-				outputIndex := (index+r.gap)%len(r.output) - 1
-				for _, n := range r.nexts {
-					char = n.GetOutput(char)
-				}
-				r.rotate()
 
-				return r.output[outputIndex]
-			}
+		inputIndex := slices.Index(r.input, i)
+		outputIndex := (inputIndex+r.gap)%len(r.output) - 1
+		output := r.output[outputIndex]
+
+		for _, next := range r.nexts {
+			output = next.GetOutput(output)
 		}
+
+		return output
 	}
 	return ""
 }
