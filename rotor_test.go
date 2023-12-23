@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -69,10 +68,52 @@ func TestRotor_GetOutputWith27(t *testing.T) {
 
 	for _, char := range input {
 		output += r1.GetOutput(char)
-		fmt.Println(len(output))
 	}
 
 	if wantedOutput != output {
 		t.Fatalf("Rotor error. For %v we sould have %v and not %v", input, wantedOutput, output)
+	}
+}
+
+func TestRotor_GetOutputWith27CharsAnd2Rotors(t *testing.T) {
+	input := []string{"i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i", "i"}
+	wantedOutput := "fgchajyelropbsktdimznuqvwxa"
+
+	r1 := GenerateRotor1()
+	r2 := GenerateRotor2()
+	r1.nexts = append(r1.nexts, *r2)
+
+	var output string
+
+	for _, char := range input {
+		output += r1.GetOutput(char)
+	}
+
+	if wantedOutput != output {
+		t.Fatalf("Rotor error. For %v we sould have %v and not %v", input, wantedOutput, output)
+	}
+}
+
+func TestRotor_rotate1Time(t *testing.T) {
+	r1 := GenerateRotor1()
+	wantedGap := 1
+
+	r1.rotate()
+
+	if r1.gap != wantedGap {
+		t.Fatalf("Rotor error. The gap after one turn sould be %v and not %v", wantedGap, r1.gap)
+	}
+}
+
+func TestRotor_rotate27Time(t *testing.T) {
+	r1 := GenerateRotor1()
+	wantedGap := 1
+
+	for i := 0; i < 27; i++ {
+		r1.rotate()
+	}
+
+	if r1.gap != wantedGap {
+		t.Fatalf("Rotor error. The gap after one turn sould be %v and not %v", wantedGap, r1.gap)
 	}
 }
