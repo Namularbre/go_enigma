@@ -10,17 +10,20 @@ type Rotor struct {
 }
 
 func (r *Rotor) rotate() {
-	outputSize := len(r.output) - 1
+	outputSize := len(r.output)
 	r.gap++
 	if r.gap == outputSize {
 		r.gap = 0
-		r.nexts[0].rotate()
+
+		if len(r.nexts) != 0 {
+			r.nexts[0].rotate()
+		}
 	}
 }
 
 func (r *Rotor) GetOutput(i string) string {
 	if slices.Contains(r.input, i) {
-		outputSize := len(r.output) - 1
+		outputSize := len(r.output)
 		inputIndex := slices.Index(r.input, i) + r.gap
 		outputIndex := inputIndex % outputSize
 		output := r.output[outputIndex]
