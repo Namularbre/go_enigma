@@ -10,8 +10,9 @@ type Rotor struct {
 }
 
 func (r *Rotor) rotate() {
+	outputSize := len(r.output) - 1
 	r.gap++
-	if r.gap == len(r.output) {
+	if r.gap == outputSize {
 		r.gap = 0
 		r.nexts[0].rotate()
 	}
