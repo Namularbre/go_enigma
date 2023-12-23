@@ -1,4 +1,4 @@
-###Enigma in go
+Enigma in go
 
 This project is an Enigma like, that encrypt your text. This project is my first in Go, and is just an excuse to learn the language.
 
